@@ -240,6 +240,25 @@ useExperimentWebSocket(experimentId, (data) => {
 });
 ```
 
+## 📚 ドキュメント
+
+プロジェクトの詳細なドキュメントは `docs/` ディレクトリにあります：
+
+### フロントエンド開発者向け
+- **[QUICKSTART.md](./QUICKSTART.md)** - 5分で起動するクイックスタートガイド
+- **[docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - フロントエンド技術アーキテクチャ
+- **[docs/REPORTS_AND_SETTINGS_IMPLEMENTATION.md](./docs/REPORTS_AND_SETTINGS_IMPLEMENTATION.md)** - Reports/Settings ページ実装詳細
+- **[docs/PROJECT_SUMMARY.md](./docs/PROJECT_SUMMARY.md)** - プロジェクト総括
+
+### バックエンド開発者向け
+- **[docs/BACKEND_ARCHITECTURE.md](./docs/BACKEND_ARCHITECTURE.md)** - バックエンドアーキテクチャ設計
+- **[docs/API_MOCK_DATA.md](./docs/API_MOCK_DATA.md)** - API モックデータ仕様
+- **[docs/CORS_SETUP.md](./docs/CORS_SETUP.md)** - CORS 設定ガイド ⚠️ **重要**
+
+## 🧪 API テスト
+
+`test-api.html` をブラウザで開くことで、バックエンド API のテストが可能です。
+
 ## ライセンス
 
 MIT

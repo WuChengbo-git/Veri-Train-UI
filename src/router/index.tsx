@@ -7,16 +7,18 @@ import { lazy, Suspense } from 'react';
 import MainLayout from '@/components/layout/MainLayout';
 import { Spin } from 'antd';
 
+// 直接导入（临时禁用懒加载以调试缓存问题）
+import Datasets from '@/pages/Datasets';
+import Experiments from '@/pages/Experiments';
+import Evaluation from '@/pages/Evaluation';
+
 // 懒加载页面组件
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Models = lazy(() => import('@/pages/Models'));
 const ModelDetail = lazy(() => import('@/pages/Models/ModelDetail'));
-const Datasets = lazy(() => import('@/pages/Datasets'));
 const DatasetDetail = lazy(() => import('@/pages/Datasets/DatasetDetail'));
 const GenerateDataset = lazy(() => import('@/pages/Datasets/GenerateDataset'));
-const Experiments = lazy(() => import('@/pages/Experiments'));
 const ExperimentDetail = lazy(() => import('@/pages/Experiments/ExperimentDetail'));
-const Evaluation = lazy(() => import('@/pages/Evaluation'));
 const Reports = lazy(() => import('@/pages/Reports'));
 const ReportDetail = lazy(() => import('@/pages/Reports/ReportDetail'));
 const Settings = lazy(() => import('@/pages/Settings'));
@@ -72,11 +74,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <Suspense fallback={<PageLoading />}>
-                <Datasets />
-              </Suspense>
-            ),
+            element: <Datasets />,
           },
           {
             path: 'generate',
@@ -101,11 +99,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: (
-              <Suspense fallback={<PageLoading />}>
-                <Experiments />
-              </Suspense>
-            ),
+            element: <Experiments />,
           },
           {
             path: ':id',
@@ -119,11 +113,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'evaluation',
-        element: (
-          <Suspense fallback={<PageLoading />}>
-            <Evaluation />
-          </Suspense>
-        ),
+        element: <Evaluation />,
       },
       {
         path: 'reports',

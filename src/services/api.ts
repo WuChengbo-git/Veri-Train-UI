@@ -81,28 +81,28 @@ class APIClient {
   }
 
   async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.instance.get<APIResponse<T>>(url, config);
-    return response.data.data;
+    const response = await this.instance.get<T>(url, config);
+    return response.data;
   }
 
   async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.instance.post<APIResponse<T>>(url, data, config);
-    return response.data.data;
+    const response = await this.instance.post<T>(url, data, config);
+    return response.data;
   }
 
   async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.instance.put<APIResponse<T>>(url, data, config);
-    return response.data.data;
+    const response = await this.instance.put<T>(url, data, config);
+    return response.data;
   }
 
   async patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.instance.patch<APIResponse<T>>(url, data, config);
-    return response.data.data;
+    const response = await this.instance.patch<T>(url, data, config);
+    return response.data;
   }
 
   async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    const response = await this.instance.delete<APIResponse<T>>(url, config);
-    return response.data.data;
+    const response = await this.instance.delete<T>(url, config);
+    return response.data;
   }
 
   // Upload file with progress

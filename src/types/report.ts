@@ -6,15 +6,33 @@ export interface Report {
   id: string;
   experimentId: string;
   title: string;
-  status: 'draft' | 'published';
+  description: string;
+  type: 'performance' | 'comparison' | 'analysis' | 'summary';
+  status: 'draft' | 'published' | 'generating';
   createdAt: string;
   publishedAt?: string;
+  createdBy: string;
+  tags?: string[];
 }
 
 export interface ReportDetail extends Report {
   summary: ReportSummary;
   comparison: ComparisonAnalysis;
   syntheticDataAnalysis: SyntheticDataImpact;
+  metricsSummary: {
+    avgBleu?: number;
+    avgRougeL?: number;
+    avgRibes?: number;
+    bestModel?: string;
+    improvementRate?: number;
+  };
+  charts: {
+    type: 'line' | 'bar' | 'radar' | 'scatter';
+    title: string;
+    data: any;
+  }[];
+  conclusions: string[];
+  recommendations: string[];
   nextSteps: string[];
 }
 
@@ -49,4 +67,10 @@ export interface SyntheticDataImpact {
   performanceChange: number;
   qualityAssessment: string;
   recommendation: string;
+}
+
+export interface ReportFilters {
+  type?: string;
+  status?: string;
+  search?: string;
 }

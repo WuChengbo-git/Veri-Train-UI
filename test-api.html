@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test - Veri Train UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #1890ff;
+        }
+        button {
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #40a9ff;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border: 1px solid #d1d5da;
+            border-radius: 4px;
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .success {
+            color: #52c41a;
+        }
+        .error {
+            color: #ff4d4f;
+        }
+        .info {
+            background-color: #e6f7ff;
+            border-left: 4px solid #1890ff;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Veri Train UI - API Test Page</h1>
+
+    <div class="info">
+        <strong>注意:</strong> このページは API エンドポイントのテスト用です。
+        後端開発者は <code>API_MOCK_DATA.md</code> を参照して実装してください。
+    </div>
+
+    <div class="section">
+        <h2>既存の API テスト</h2>
+        <button onclick="testAPI('models')">Test Models API</button>
+        <button onclick="testAPI('datasets')">Test Datasets API</button>
+        <button onclick="testAPI('experiments')">Test Experiments API</button>
+        <button onclick="testAPI('evaluations')">Test Evaluations API</button>
+    </div>
+
+    <div class="section">
+        <h2>Reports API テスト (新規)</h2>
+        <button onclick="testAPI('reports')">GET /reports</button>
+        <button onclick="testAPI('reports/report-001')">GET /reports/:id</button>
+        <button onclick="testCreateReport()">POST /reports (Create)</button>
+        <button onclick="testPublishReport()">POST /reports/:id/publish</button>
+    </div>
+
+    <div class="section">
+        <h2>Settings API テスト (新規)</h2>
+        <button onclick="testAPI('settings/system')">GET /settings/system</button>
+        <button onclick="testAPI('settings/preferences')">GET /settings/preferences</button>
+        <button onclick="testUpdateSettings()">PUT /settings/system</button>
+        <button onclick="testTestConnection()">POST /settings/test-connection</button>
+    </div>
+
+    <div class="section">
+        <h2>Response</h2>
+        <pre id="result">結果がここに表示されます...</pre>
+    </div>
+
+    <script>
+        const API_BASE = 'http://10.36.94.98:8000/api/v1';
+
+        async function testAPI(endpoint) {
+            const result = document.getElementById('result');
+            result.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/${endpoint}`);
+                const data = await response.json();
+                result.className = 'success';
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = 'Error: ' + error.message + '\n\nこのエンドポイントはまだ実装されていない可能性があります。\nAPI_MOCK_DATA.md を参照して実装してください。';
+            }
+        }
+
+        async function testCreateReport() {
+            const result = document.getElementById('result');
+            result.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/reports`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: 'テストレポート',
+                        description: 'API テストから作成されたレポート',
+                        type: 'performance',
+                        experimentId: 'exp-001'
+                    })
+                });
+                const data = await response.json();
+                result.className = 'success';
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = 'Error: ' + error.message + '\n\nこのエンドポイントはまだ実装されていない可能性があります。';
+            }
+        }
+
+        async function testPublishReport() {
+            const result = document.getElementById('result');
+            result.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/reports/report-003/publish`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                const data = await response.json();
+                result.className = 'success';
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = 'Error: ' + error.message + '\n\nこのエンドポイントはまだ実装されていない可能性があります。';
+            }
+        }
+
+        async function testUpdateSettings() {
+            const result = document.getElementById('result');
+            result.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/settings/system`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        general: {
+                            language: 'ja',
+                            theme: 'light'
+                        }
+                    })
+                });
+                const data = await response.json();
+                result.className = 'success';
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = 'Error: ' + error.message + '\n\nこのエンドポイントはまだ実装されていない可能性があります。';
+            }
+        }
+
+        async function testTestConnection() {
+            const result = document.getElementById('result');
+            result.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_BASE}/settings/test-connection`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        url: API_BASE
+                    })
+                });
+                const data = await response.json();
+                result.className = 'success';
+                result.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.className = 'error';
+                result.textContent = 'Error: ' + error.message + '\n\nこのエンドポイントはまだ実装されていない可能性があります。';
+            }
+        }
+    </script>
+</body>
+</html>
