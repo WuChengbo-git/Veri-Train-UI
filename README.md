@@ -251,13 +251,44 @@ useExperimentWebSocket(experimentId, (data) => {
 - **[docs/PROJECT_SUMMARY.md](./docs/PROJECT_SUMMARY.md)** - プロジェクト総括
 
 ### バックエンド開発者向け
+- **[FINAL_VALIDATION_REPORT.md](./FINAL_VALIDATION_REPORT.md)** - 🎉 最終検証レポート（95%完成！）
+- **[API_FORMAT_VALIDATION.md](./API_FORMAT_VALIDATION.md)** - API データフォーマット検証ガイド
+- **[BACKEND_QUICK_FIX.md](./BACKEND_QUICK_FIX.md)** - 3ステップクイック修正ガイド
 - **[docs/BACKEND_ARCHITECTURE.md](./docs/BACKEND_ARCHITECTURE.md)** - バックエンドアーキテクチャ設計
 - **[docs/API_MOCK_DATA.md](./docs/API_MOCK_DATA.md)** - API モックデータ仕様
-- **[docs/CORS_SETUP.md](./docs/CORS_SETUP.md)** - CORS 設定ガイド ⚠️ **重要**
+- **[docs/CORS_SETUP.md](./docs/CORS_SETUP.md)** - CORS 設定ガイド
 
 ## 🧪 API テスト
 
+### 自動テストスクリプト
+```bash
+bash test-backend-api.sh
+```
+
+### ブラウザテスト
 `test-api.html` をブラウザで開くことで、バックエンド API のテストが可能です。
+
+### Mock サーバー（フロントエンド開発用）
+```bash
+node mock-server.cjs
+```
+
+## 🎯 現在のステータス
+
+### ✅ 完成した機能
+- Dashboard - システム概要ダッシュボード
+- Models - モデル管理ページ
+- Datasets - データセット管理ページ
+- Experiments - 実験管理ページ
+- Evaluation - 評価ページ
+- **Reports - レポートページ（バックエンド連携完了）** ✨
+- **Settings - 設定ページ（バックエンド連携完了）** ✨
+
+### ⚠️ 残タスク（バックエンド）
+1. **Reports API**: 分页字段命名を camelCase に変更（`page_size` → `pageSize`, `total_pages` → `totalPages`）
+2. **CORS**: CORS middleware の設定（2分で完了）
+
+詳細は [FINAL_VALIDATION_REPORT.md](./FINAL_VALIDATION_REPORT.md) を参照してください。
 
 ## ライセンス
 
